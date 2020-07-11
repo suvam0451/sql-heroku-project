@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS branch_supplier (
 
 -- First branch
 INSERT INTO branch VALUES(1, "Corporate", 100, "2006-11-17"); -- 100 linked to david !!!
-INSERT INTO employee VALUES(100, "David", "Wallace", "1967-11-17", "M", 250000, NULL, NULL); -- NULL because branch not created yet !!!
+INSERT INTO employee VALUES(100, "David", "Wallace", "1967-11-17", "M", 250000, NULL, NULL); 
+-- NULL because branch not created yet !!!
 INSERT INTO employee VALUES(101, "Jan", "Levinson", "1961-05-11", "M", 260000, NULL, NULL);
 -- Next branch
 INSERT INTO branch VALUES(1, "Syndicate", 100, "2006-11-17"); -- 100 linked to david !!!
@@ -99,3 +100,21 @@ INSERT INTO works_with(102, 405, 130000);
 -- ALTER TABLE employee
 -- ADD FOREIGN KEY(super_id) REFERENCES employee(emp_id) ON DELETE
 -- SET NULL;
+
+-- FUNCTIONS !!!
+
+SELECT COUNT(emp_id) FROM employee; -- How many employee IDs
+SELECT COUNT(super_id) FROM employee; -- NULL ignored
+SELECT COUNT(emp_id) FROM employee WHERE sex = "F" AND birth_date > '1971-01-01'; -- Selection
+
+-- Average calculation
+SELECT AVG(salary) FROM employee;
+SELECT AVG(salary) FROM employee WHERE sex ="M";
+
+-- Sum calculation
+SELECT SUM(salary) FROM employee;
+
+-- Find M/F in company
+SELECT COUNT(sex) FROM employee;
+SELECT COUNT(sex), sex FROM employee; -- Also returns count (NOT WORKING)
+SELECT COUNT(sex), sex FROM employee GROUP BY sex; -- [[2 M], [0 F]]
